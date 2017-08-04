@@ -1,0 +1,20 @@
+.qltn {
+
+}
+
+.qltn-panel-title {
+	padding: 5px 0;
+	display: inline-block;
+}
+
+.list-item {
+	padding: 5px 0;
+}
+
+.active-row {
+	background: #cdcdcd
+}
+
+.text-white {
+	color: #fff !important;
+}

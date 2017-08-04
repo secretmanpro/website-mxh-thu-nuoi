@@ -1,0 +1,245 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+
+<head>
+    <title>Liên lạc với bác sĩ - Mạng xã hội thú nuôi</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keyword" content="mang xa hoi thu nuoi, mạng xã hội thú nuôi " />
+    <link rel="shortcut icon" href="images/favicon.png">
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="css/default.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="css/index.css" rel="stylesheet" type="text/css" media="all" />
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <!--<script src="js/bootstrap.js"></script>-->
+
+    <link href="css/chatbacsi.css" rel="stylesheet" type="text/css" media="all" />
+</head>
+
+<body>
+    </script>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid menu-horizontal">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+			<span class="sr-only">Toggle navigation</span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		  </button>
+
+                <a class="navbar-brand" href="index.html">MẠNG XÃ HỘI THÚ NUÔI</a>
+
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+                <form class="navbar-form navbar-left">
+                    <div class="form-group form-search">
+                        <input type="text" class="form-control form-search-1 form-search-1-mobile" placeholder="Tìm kiếm">
+
+                        <button type="submit" class="btn btn-primary "><span class="glyphicon glyphicon-search " aria-hidden="true"></span></button>
+                    </div>
+                </form>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Thú nuôi <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li class="dropdown-header">Thú nuôi của tôi</li>
+                            <li>
+                                <a href="#">
+                                    <i class="glyphicon glyphicon-user" style="padding-right: 10px"></i>Ki Ki
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="glyphicon glyphicon-user" style="padding-right: 10px"></i>Lu Lu
+                                </a>
+                            </li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="quanlythunuoi.html">Quản lý thú nuôi</a></li>
+                            <li><a href="timbacsi.html">Tìm bác sĩ</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tuỳ chọn <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">xxx</a></li>
+                            <li><a href="#">xxx</a></li>
+                            <li><a href="#">xxx</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">Đăng xuất</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+    <div class="container-fluid" id="chuc-nang-bac-si">
+        <div class="row">
+            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xs-offset-2">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div style="padding:20px;">
+                            <img class="img-circle avatar" style="width:100%" src="images/timbacsi/avatar_doctor.jpg" alt="Bác sĩ">
+                            <h3 style="text-align: center">{{tenBs}}</h3>
+                            <p>Chuyên khoa: Nội</p>
+                            <p><span class="glyphicon glyphicon-home"></span> Quận 1, TP HCM</p>
+                            <p><span class="glyphicon glyphicon-phone"></span> 0918 825 321</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                <div class="row">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title" style="vertical-align: middle"> {{tieuDe}}
+                                <button type="button" class="btn btn-default pull-right" style="vertical-align: middle" v-on:click="ketThucChat()" v-if="notEndChat">Kết thúc liên lạc</button>
+                            </h3>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="panel-body message-panel" v-show="notEndChat">
+                            <div class="container-fluid">
+                                <template v-for="chat in dsChat">
+                                        <div class="row message-bubble">
+                                            <p class="text-muted">{{chat.ten}}</p>
+                                            <span>{{chat.noiDung}}</span>
+                                        </div>
+                                    </template>
+                            </div>
+                        </div>
+                        <div class="panel-footer" v-show="notEndChat">
+                            <div class="input-group">
+                                <input v-on:keyup.enter="themChat('Tôi')" v-model="noiDungNhap" type="text" class="form-control">
+                                <span class="input-group-btn">
+                                <button class="btn btn-default" type="button" v-on:click="themChat('Tôi')">Gửi</button>
+                            </span>
+                            </div>
+                        </div>
+                        <div class="panel-body" v-show="!notEndChat">
+                            <div style="padding:10px;">
+                                <div class="form-group">
+                                    <label for="ratingEle">Bạn có hài lòng với sự hỗ trợ của bác sĩ?</label>
+                                </div>
+                                <div class="form-group">
+                                    <button id="btnThumbUp" type="button" class="btn btn-lg btn-default"><span class="glyphicon glyphicon-thumbs-up"></span> Hài lòng</button>
+                                    <button id="btnThumbDown" type="button" class="btn btn-lg btn-default"><span class="glyphicon glyphicon-thumbs-down"></span> Không hài lòng</button>
+                                    <button id="btnQuestion" type="button" class="btn btn-lg btn-default"><span class="glyphicon glyphicon-question-sign"></span> Không có ý kiến</button>
+                                </div>
+                                <div class="form-group">
+                                    <label for="noteEle">Đánh giá khác của bạn:</label>
+                                    <textarea id="noteEle" class="form-control" rows="5"></textarea>
+                                </div>
+                            </div>
+                            <div class="panel-footer" v-show="!notEndChat">
+                                <button class="btn btn-default pull-right" type="button" v-on:click="troVeTrangChu()">Kết thúc</button>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="chat">
+            <p style="color:white;">Chat(15) &nbsp; <span style="color:white" class="glyphicon glyphicon-edit"></span> &nbsp;<span style="color:white" class="glyphicon glyphicon-cog"></span>&nbsp;<span style="color:white" class="glyphicon glyphicon-remove"></span>
+            </p>
+        </div>
+        <div id="footer">
+            <b>Copyright KMTT @2017</b></br>
+            <p><img class="flag" src="images/flag.png" />&nbsp;<a>Tiếng Việt</a> &nbsp;<img class="flag" src="images/flag1.png" />&nbsp;<a>English</a></p>
+        </div>
+        <script src="js/tiny-cookie.min.js"></script>
+        <script src="js/vue.js"></script>
+        <script>
+            var appChat = new Vue({
+                el: '#chuc-nang-bac-si',
+                data: {
+                    dsChat: [{
+                        ten: Cookie.get('thunuoi_tenbs'),
+                        noiDung: "Xin chào, tôi có thể hỗ trợ gì cho bạn?"
+                    }],
+                    noiDungNhap: "",
+                    notEndChat: true,
+                    tieuDe: 'Bạn đang được hỗ trợ bởi bác sĩ "' + Cookie.get('thunuoi_tenbs') + '"',
+                    tenBs: Cookie.get('thunuoi_tenbs')
+                },
+                methods: {
+                    themChat: function(name) {
+                        this.dsChat.push({
+                            ten: name,
+                            noiDung: this.noiDungNhap
+                        });
+                        this.noiDungNhap = "";
+                        setTimeout(function() {
+                            appChat.bsThemChat();
+                        }, 3000);
+                    },
+                    bsThemChat: function() {
+                        this.dsChat.push({
+                            ten: Cookie.get('thunuoi_tenbs'),
+                            noiDung: "Bác sĩ trả lời."
+                        });
+                    },
+                    ketThucChat: function() {
+                        this.notEndChat = false;
+                        this.tieuDe = "Kết thúc liên lạc";
+                    },
+                    troVeTrangChu: function() {
+                        window.location = "timbacsi.html";
+                    }
+                }
+            })
+            $("#btnThumbUp").click(function() {
+                $("#btnThumbUp").removeClass("btn-default");
+                $("#btnThumbUp").addClass("btn-success");
+                $("#btnThumbUp").addClass("active");
+
+                $("#btnThumbDown").removeClass("active");
+                $("#btnThumbDown").removeClass("btn-danger");
+                $("#btnThumbDown").addClass("btn-default");
+
+                $("#btnQuestion").removeClass("active");
+                $("#btnQuestion").removeClass("btn-info");
+                $("#btnQuestion").addClass("btn-default");
+            });
+            $("#btnThumbDown").click(function() {
+                $("#btnThumbUp").removeClass("btn-success");
+                $("#btnThumbUp").removeClass("active");
+                $("#btnThumbUp").addClass("btn-default");
+
+                $("#btnThumbDown").removeClass("btn-default");
+                $("#btnThumbDown").addClass("active");
+                $("#btnThumbDown").addClass("btn-danger");
+
+                $("#btnQuestion").removeClass("active");
+                $("#btnQuestion").removeClass("btn-info");
+                $("#btnQuestion").addClass("btn-default");
+            });
+            $("#btnQuestion").click(function() {
+                $("#btnThumbUp").removeClass("btn-success");
+                $("#btnThumbUp").removeClass("active");
+                $("#btnThumbUp").addClass("btn-default");
+
+                $("#btnThumbDown").removeClass("active");
+                $("#btnThumbDown").removeClass("btn-danger");
+                $("#btnThumbDown").addClass("btn-default");
+
+                $("#btnQuestion").removeClass("btn-default");
+                $("#btnQuestion").addClass("active");
+                $("#btnQuestion").addClass("btn-info");
+            });
+        </script>
+</body>
+
+</html>

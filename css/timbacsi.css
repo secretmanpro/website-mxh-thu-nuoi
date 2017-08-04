@@ -1,0 +1,23 @@
+.bacsi .avatar {
+    width: 98px;
+    float: left;
+    padding: 4px;
+}
+
+.bacsi .thongtin {
+    overflow: hidden;
+}
+
+.bacsi .thongtin h3 {
+    margin-top: 0px;
+}
+
+.thumbnail {
+    border-color: #fff;
+}
+
+.thumbnail:hover,
+.thumbnail:focus,
+.thumbnail.active {
+    border-color: #337ab7;
+}

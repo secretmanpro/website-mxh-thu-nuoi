@@ -1,0 +1,226 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+
+<head>
+    <title>Quản lý thú nuôi - Mạng xã hội thú nuôi</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="keyword" content="mang xa hoi thu nuoi, mạng xã hội thú nuôi "/>
+	<link rel="shortcut icon" href="images/favicon.png">
+    <script src="js/vue.js"></script>
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="css/default.css" rel="stylesheet" type="text/css" media="all" />
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <!--<script src="js/bootstrap.js"></script>-->
+    <link href="css/quanlythunuoi.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="css/index.css" rel="stylesheet" type="text/css" media="all" />
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid menu-horizontal">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+			<span class="sr-only">Toggle navigation</span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		  </button>
+
+                <a class="navbar-brand" href="index.html">MẠNG XÃ HỘI THÚ NUÔI</a>
+
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+                <form class="navbar-form navbar-left">
+                      <div class="form-group form-search" > 
+						<input type="text" class="form-control form-search-1 form-search-1-mobile" placeholder="Tìm kiếm">
+
+						<button  type="submit" class="btn btn-primary "><span class="glyphicon glyphicon-search " aria-hidden="true"></span></button>
+                    </div>
+                </form>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Thú nuôi <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li class="dropdown-header">Thú nuôi của tôi</li>
+                            <li>
+                                <a href="#">
+                                    <i class="glyphicon glyphicon-user" style="padding-right: 10px"></i>Ki Ki
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="glyphicon glyphicon-user" style="padding-right: 10px"></i>Lu Lu
+                                </a>
+                            </li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">Quản lý thú nuôi</a></li>
+                            <li><a href="timbacsi.html">Tìm bác sĩ</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tuỳ chọn <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">xxx</a></li>
+                            <li><a href="#">xxx</a></li>
+                            <li><a href="#">xxx</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">Đăng xuất</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+    <div class="container-fluid qltn" id="quan-ly-thu-nuoi">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="panel panel-default">
+                    <div class="panel-heading clearfix">
+                        <b class="qltn-panel-title">Danh sách thú nuôi</b>
+                        <div class="pull-right">
+                            <button type="button" class="btn btn-success" v-on:click="createNew()"><i class="glyphicon glyphicon-plus" style="color: #fff"></i> Thêm mới</button>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <template v-for="thu in dsThu">
+                        <div class="row list-item" v-bind:class="{ 'active-row': thu.isActive }" style="cursor: pointer; margin-bottom: 5px" v-on:click="selectItem(thu)" >
+                            <div class="col-xs-4">
+                                <img v-bind:src="thu.avtUrl" alt="Pet" class="img-circle" style="max-width: 100%">
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                        <p><b>{{thu.ten}}</b></p>
+                                        <p>{{thu.giong}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-2">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" v-model="thu.selected" />
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        </template>
+                        <p v-if="dsThu.length === 0" class="text-center">(Danh sách rỗng)</p>
+                    </div>
+                    <div class="panel-footer clearfix">
+                        <button type="button" class="btn btn-default pull-left" v-on:click="toggleSelectAll()"><span v-if="!isSelectAll">Chọn tất cả</span><span v-else>Hủy chọn</span></button>
+                        <button type="button" class="btn btn-danger pull-right" v-on:click="deleteItem()"><i class="glyphicon glyphicon-trash text-white"></i> Xóa</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                    <b v-if="!isEditMode" class="qltn-panel-title">Tạo mới thú nuôi</b><b class="qltn-panel-title" v-else>Chỉnh sửa thú nuôi #{{ itemData.id }} - {{ itemData.ten }} - {{ itemData.loai }}</b>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                <div class="form-group">
+                                    <img v-if="isEditMode" v-bind:src="itemData.avtUrl" class="img-thumbnail" alt="Image">
+                                    <img v-if="!isEditMode" src="images/avt-default.png" class="img-thumbnail" alt="Image">
+                                </div>
+
+                                <div v-if="!isEditMode">
+                                    <button type="button" class="btn btn-default">Chọn</button>
+                                </div>
+                                <div v-if="isEditMode" class="text-center">
+                                    <button type="button" class="btn btn-default">Thay đổi</button>
+                                    <button type="button" class="btn btn-danger">Xóa</button>
+                                </div>
+                            </div>
+                            <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                                <form class="form-horizontal" role="form">
+                                    <div class="form-group">
+                                        <label for="" class="control-label col-md-3 text-right">Tên thú nuôi</label>
+                                        <div class="col-md-7">
+                                            <input type="text" class="form-control" id="" placeholder="Kiki, Blue, Greeny..." v-model="itemData.ten" required="required">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="" class="control-label col-md-3 text-right">Loại</label>
+                                        <div class="col-md-7">
+                                            <input type="text" class="form-control" id="" placeholder="Gia cầm, bò sát, khác..." v-model="itemData.loai" required="required">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="" class="control-label col-md-3 text-right">Giống</label>
+                                        <div class="col-md-7">
+                                            <select name="" id="input" class="form-control" required="required" v-model="itemData.giong">
+                                                    <option value="Anh">Anh</option>
+                                                    <option value="Hà Lan">Hà Lan</option>
+                                                    <option value="Xiêm">Xiêm</option>
+                                                    <option value="Đức">Đức</option>
+                                                    <option value="Mỹ">Mỹ</option>
+                                                    <option value="Nhật">Nhật</option>
+                                                    <option value="Khác">Khác</option>
+                                                </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="" class="control-label col-md-3 text-right">Tuổi</label>
+                                        <div class="col-md-7">
+                                            <input type="text" class="form-control" id="" placeholder="6 tháng, 1 năm, 4 năm..." v-model="itemData.tuoi" required="required">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="" class="control-label col-md-3 text-right">Thức ăn</label>
+                                        <div class="col-md-7">
+                                            <select name="" id="input" class="form-control" required="required" v-model="itemData.thucAn">
+                                                    <option value="Thịt">Thịt</option>
+                                                    <option value="Cỏ">Cỏ</option>
+                                                    <option value="Côn Trùng">Côn trùng</option>
+                                                </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-7 col-sm-offset-3 text-right">
+                                            <button type="button" class="btn btn-primary" v-on:click="saveItem(itemData)">
+                                                <span v-if="isEditMode" class="text-white"><i class="glyphicon glyphicon-floppy-save text-white"></i> Lưu lại</span>
+                                                <span v-else class="text-white"><i class="glyphicon glyphicon-check text-white"></i> Tạo</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+      <div id="chat">
+        <p style="color:white;">Chat(15) &nbsp; <span style="color:white" class="glyphicon glyphicon-edit"></span> &nbsp;<span style="color:white" class="glyphicon glyphicon-cog"></span>&nbsp;<span style="color:white" class="glyphicon glyphicon-remove"></span>
+        </p>
+    </div>
+    <div id="footer">
+        <b>Copyright KMTT @2017</b></br>
+        <p><img class="flag" src="images/flag.png"/>&nbsp;<a>Tiếng Việt</a> &nbsp;<img class="flag" src="images/flag1.png"/>&nbsp;<a>English</a></p>
+    </div>
+
+    <script src="js/quanlythunuoi.js"></script>
+</body>
+
+</html>
